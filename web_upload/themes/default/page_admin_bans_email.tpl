@@ -1,29 +1,26 @@
-<h3>Email Player  <i>({$email_addr})</i></h3>
-<table width="90%" style="border-collapse:collapse;" id="group.details" cellpadding="3">
-	<tr>
-    	<td valign="top" width="35%">
-    		<div class="rowdesc">{help_icon title="Subject" message="Type the subject of the email."}Subject </div>
-    	</td>
-    	
-    <td><div align="left">
-      <input type="text" TABINDEX=1 class="submit-fields" id="subject" name="subject" />
-    </div><div id="subject.msg" class="badentry"></div></td>
-  </tr>
-  <tr>
-    <td valign="top"><div class="rowdesc">{help_icon title="Message" message="Type your message here."}Message </div></td>
-    <td><div align="left">
-       <textarea class="submit-fields" TABINDEX=2 cols="35" rows="7" id="message" name="message"></textarea>
-    </div><div id="message.msg" class="badentry"></div></td>
-  </tr>
- 	
-
- <tr>
-    <td>&nbsp;</td>
-		<td>
-      		{sb_button text="Send Email" onclick="$email_js" class="ok" id="aemail" submit=false}
-     		 &nbsp;
-      		{sb_button text="Back" onclick="history.go(-1)" class="cancel" id="back" submit=false}
-     	</td>
- 	</tr>
-</table>
-
+          <div id="admin-page-menu">
+            <ul>
+              {foreach from=$admin_tabs item=tab}
+              <li{if !empty($tab.id)} id="tab-{$tab.id}"{/if}><a href="{$tab.url}">{$tab.name}</a></li>
+              {/foreach}
+              <li class="active"><a class="back" href="#">{$lang_back}</a></li>
+            </ul>
+            <br />
+            <div align="center">
+              <img alt="{$page_title}" src="themes/{$theme_dir}/images/admin/bans.png" title="{$page_title}" />
+            </div>
+          </div>
+          <form action="{$active}" id="admin-page-content" method="post">
+            <fieldset>
+              <h3>Email Player <em>({$smarty.get.email})</em></h3>
+              <label for="subject">{help_icon title="Subject" desc="Type the subject of the email."}Subject</label>
+              <input class="submit-fields" {nid id="subject"} />
+              <label for="message">{help_icon title="$lang_message" desc="Type your message here."}{$lang_message}</label>
+              <textarea class="submit-fields" cols="35" {nid id="message"} rows="7"></textarea>
+              <div class="center">
+                <input name="email" type="hidden" value="{$smarty.get.email}" />
+                <input class="btn ok" type="submit" value="{$lang_submit}" />
+                <input class="back btn cancel" type="button" value="{$lang_back}" />
+              </div>
+            </fieldset>
+          </form>

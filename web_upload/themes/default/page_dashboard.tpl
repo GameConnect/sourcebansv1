@@ -1,91 +1,60 @@
-<div class="front-module-intro">
-	<table width="100%" cellpadding="1">
-		<tr>
-			<td colspan="3">
-				<h3>{$dashboard_title}</h3>		
-			</td>
-		</tr>
-		<tr>
-			<td>
-				{$dashboard_text}
-			</td>
-		</tr>
-	</table>
-</div>
+          <div class="front-module-intro">
+            <h3>{$dashboard_title}</h3>
+            {$dashboard_text}
+          </div>
+          <div id="front-servers">
+{include file='page_servers.tpl'}
 
-
-<div id="front-servers">
-	{include file='page_servers.tpl'}
-</div>
-
-
-<div class="front-module" style="float:right">
-	<table width="100%" cellpadding="1" class="listtable">
-		<tr>
-			<td colspan="3">
-				<table width="100%" cellpadding="0" cellspacing="0" class="front-module-header">
-					<tr>
-						<td align="left">
-							Latest Players Blocked
-						</td>
-						<td align="right">
-							Total Stopped: {$total_blocked}
-						</td>
-					</tr>
-				</table>
-			</td>
-		</tr>				
-		<tr>
-			<td width="16px" height="16" class="listtable_top">&nbsp;</td>
-			<td height="25%" class="listtable_top" align="center"><b>Date/Time</b></td>
-			<td height="16" class="listtable_top"><b>Name</b></td>	  
-		</tr>
-		{foreach from=$players_blocked item=player}
-		<tr{if $dashboard_lognopopup} onclick="{$player.link_url}"{else} onclick="{$player.popup}"{/if} onmouseout="this.className='tbl_out'" onmouseover="this.className='tbl_hover'" style="cursor: pointer;" id="{$player.server}" title="Querying Server Data...">
-      <td width="16" height="16" align="center" class="listtable_1"><img src="images/forbidden.png" width="16" height="16" alt="Blocked Player" /></td>
-      <td width="25%" height="16" class="listtable_1">{$player.date}</td>
-      <td height="16" class="listtable_1">{$player.short_name|escape:'html'}</td>
-		</tr>
-		{/foreach}
-	</table>
-</div>
-
-
-<div class="front-module" style="float:left">
-	<table width="100%" cellpadding="1" class="listtable">
-		<tr>
-			<td colspan="4">
-				<table width="100%" cellpadding="0" cellspacing="0" class="front-module-header">
-					<tr>
-						<td align="left">
-							Latest Added Bans
-						</td>
-						<td align="right">
-							Total bans: {$total_bans}
-						</td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-		<tr height="16">
-			<td width="16" class="listtable_top">MOD</td>
-			<td width="24%" class="listtable_top" align="center"><strong>Date/Time</strong></td>
-			<td class="listtable_top" align="center"><strong>Name</strong></td>
-			<td width="23%" class="listtable_top"><strong>Length</strong></td>
-		</tr>
-		{foreach from=$players_banned item=player}
-		<tr onclick="{$player.link_url}" onmouseout="this.className='tbl_out'" onmouseover="this.className='tbl_hover'" style="cursor:pointer;" height="16">
-      <td class="listtable_1" align="center"><img src="images/games/{$player.icon}" width="16" alt="MOD" title="MOD" /></td>
-      <td class="listtable_1">{$player.created}</td>
-      <td class="listtable_1">
-        {if empty($player.short_name)}
-          <i><font color="#677882">no nickname present</font></i>
-        {else}
-          {$player.short_name|escape:'html'}
-        {/if}
-      </td>
-      <td class="listtable_1{if $player.unbanned}_unbanned{/if}">{$player.length}{if $player.unbanned} ({$player.ub_reason}){/if}</td>
-		</tr>
-		{/foreach}
-	</table>
-</div>
+          </div>
+          <table class="flLeft front-module listtable">
+            <tr>
+              <td colspan="4">
+                <div class="front-module-header">
+                  <div class="flLeft">{$lang_latest_bans}</div>
+                  <div class="flRight">{$lang_total_bans|ucwords}: {$total_bans}</div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th class="nobold icon">MOD</th>
+              <th class="date">{$lang_date}/{$lang_time}</th>
+              <th>{$lang_name}</th>
+              <th class="short_length">{$lang_length}</th>
+            </tr>
+            {foreach from=$bans item=ban name=ban}
+            <tr class="tbl_out" onclick="window.location = '{build_url _=banlist.php}#^{$smarty.foreach.ban.index}';">
+              <td class="listtable_1 center">{if !$ban.mod_icon}<img alt="Web Ban" class="icon" src="images/games/web.png" title="Web Ban" />{else}<img alt="{$ban.mod_name|escape}" class="icon" src="images/games/{$ban.mod_icon}" title="{$ban.mod_name|escape}" />{/if}</td>
+              <td class="listtable_1 center">{$ban.time|date_format:$date_format}</td>
+              <td class="listtable_1">
+                {if empty($ban.name)}
+                <em class="not_applicable">no nickname present</em>
+                {else}
+                {$ban.name|utf8_truncate:25|escape}
+                {/if}
+              </td>
+              <td class="listtable_1{if !empty($ban.status)}_unbanned{/if}">{$ban.length|strtok:','}{if !empty($ban.status)} (<abbr title="{$ban.status}">{$ban.status|utf8_truncate:1:''}</abbr>){/if}</td>
+            </tr>
+            {/foreach}
+          </table>
+          <table class="flRight front-module listtable">
+            <tr>
+              <td colspan="3">
+                <div class="front-module-header">
+                  <div class="flLeft">{$lang_latest_blocked}</div>
+                  <div class="flRight">{$lang_total_blocked|ucwords}: {$total_blocks}</div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th class="icon">&nbsp;</th>
+              <th class="date">{$lang_date}/{$lang_time}</th>
+              <th>{$lang_name}</th>
+            </tr>
+            {foreach from=$blocks item=block}
+            <tr class="tbl_out"{if !$log_nopopup} onclick="ShowBox('error', '{$block.name|escape:quotes}', 'This user tried to enter a SourceBans protected server at: {$block.date}&lt;div class=center&gt;&lt;a href=\'{build_url _=banlist.php search=$block.steam type=steamid}\'&gt;Click here for ban details.&lt;/a&gt;&lt;/div&gt;', '{build_url _=banlist.php search=$block.steam type=steamid}');"{/if}>
+              <td class="listtable_1 icon"><img alt="Blocked Player" class="icon" src="images/forbidden.png" title="Blocked Player" /></td>
+              <td class="listtable_1 center">{$block.time|date_format:$date_format}</td>
+              <td class="listtable_1">{$block.name|utf8_truncate:42|escape}</td>
+            </tr>
+            {/foreach}
+          </table>
