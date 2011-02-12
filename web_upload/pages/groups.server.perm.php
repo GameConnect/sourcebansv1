@@ -9,7 +9,7 @@
  * @package SourceBans
  * @link http://www.sourcebans.net
  * 
- * @version $Id: groups.server.perm.php 195 2008-12-30 17:26:40Z peace-maker $
+ * @version $Id$
  * =============================================================================
  */
 

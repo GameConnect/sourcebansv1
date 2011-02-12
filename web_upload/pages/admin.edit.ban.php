@@ -9,7 +9,7 @@
  * @package SourceBans
  * @link http://www.sourcebans.net
  *
- * @version $Id: admin.edit.ban.php 258 2009-04-30 13:33:37Z tsunami $
+ * @version $Id$
  * =============================================================================
  */
 

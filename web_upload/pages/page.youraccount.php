@@ -9,7 +9,7 @@
  * @package SourceBans
  * @link http://www.sourcebans.net
  * 
- * @version $Id: page.youraccount.php 200 2008-12-31 12:33:17Z peace-maker $
+ * @version $Id$
  * =============================================================================
  */
 global $userbank, $theme;

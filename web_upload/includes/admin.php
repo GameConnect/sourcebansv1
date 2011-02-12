@@ -9,7 +9,7 @@
  * @package SourceBans
  * @link http://www.sourcebans.net
  * 
- * @version $Id: admin.php 210 2009-02-06 20:00:15Z tsunami $
+ * @version $Id$
  * =============================================================================
  */
 global $userbank;

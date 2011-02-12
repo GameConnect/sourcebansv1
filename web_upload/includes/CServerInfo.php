@@ -9,7 +9,7 @@
  * @package SourceBans
  * @link http://www.sourcebans.net
  * 
- * @version $Id: CServerInfo.php 278 2009-07-07 11:42:36Z tsunami $
+ * @version $Id$
  * =============================================================================
  */
 

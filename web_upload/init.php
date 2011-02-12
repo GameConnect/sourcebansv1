@@ -9,7 +9,7 @@
  * @package SourceBans
  * @link http://www.sourcebans.net
  * 
- * @version $Id: init.php 271 2009-06-24 18:48:42Z peace-maker $
+ * @version $Id$
  * =============================================================================
  */
 

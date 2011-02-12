@@ -9,7 +9,7 @@
  * @package SourceBans
  * @link http://www.sourcebans.net
  *
- * @version $Id: admin.admins.php 270 2009-06-22 22:01:44Z peace-maker $
+ * @version $Id$
  * =============================================================================
  */
 ?>

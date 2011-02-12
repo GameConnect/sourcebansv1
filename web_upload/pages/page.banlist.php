@@ -9,7 +9,7 @@
  * @package SourceBans
  * @link http://www.sourcebans.net
  *
- * @version $Id: page.banlist.php 292 2009-07-19 19:49:35Z peace-maker $
+ * @version $Id$
  * =============================================================================
  */
 global $theme;

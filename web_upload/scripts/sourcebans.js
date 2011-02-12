@@ -8,7 +8,7 @@
  * @package SourceBans
  * @link http://www.sourcebans.net
  * 
- * @version $Id: sourcebans.js 289 2009-07-13 18:35:11Z peace-maker $
+ * @version $Id$
  * =============================================================================
  */
 

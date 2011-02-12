@@ -9,7 +9,7 @@
  * @package SourceBans
  * @link http://www.sourcebans.net
  * 
- * @version $Id: admin.uploadmapimg.php 189 2008-12-27 20:37:10Z peace-maker $
+ * @version $Id$
  * =============================================================================
  */
 

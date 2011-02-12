@@ -9,7 +9,7 @@
  * @package SourceBans
  * @link http://www.sourcebans.net
  * 
- * @version $Id: CServerRcon.php 117 2008-08-21 17:17:54Z peace-maker $
+ * @version $Id$
  * =============================================================================
  */
 

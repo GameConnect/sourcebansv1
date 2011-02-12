@@ -9,7 +9,7 @@
  * @package SourceBans
  * @link http://www.sourcebans.net
  * 
- * @version $Id: admin.log.search.php 94 2008-07-19 18:55:09Z olly $
+ * @version $Id$
  * =============================================================================
  */
  

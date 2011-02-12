@@ -9,7 +9,7 @@
  * @package SourceBans
  * @link http://www.sourcebans.net
  * 
- * @version $Id: CSystemLog.php 153 2008-09-16 20:46:23Z peace-maker $
+ * @version $Id$
  * =============================================================================
  */
 

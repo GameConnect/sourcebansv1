@@ -9,7 +9,7 @@
  * @package SourceBans
  * @link http://www.sourcebans.net
  * 
- * @version $Id: rc1d-rc2_update.php 130 2008-08-25 15:09:44Z smithxxl $
+ * @version $Id$
  * =============================================================================
  */
 

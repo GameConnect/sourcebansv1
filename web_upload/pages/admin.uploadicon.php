@@ -9,7 +9,7 @@
  * @package SourceBans
  * @link http://www.sourcebans.net
  * 
- * @version $Id: admin.uploadicon.php 179 2008-12-11 20:37:10Z peace-maker $
+ * @version $Id$
  * =============================================================================
  */
 

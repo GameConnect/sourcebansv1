@@ -9,7 +9,7 @@
  * @package SourceBans
  * @link http://www.sourcebans.net
  *
- * @version $Id: system-functions.php 268 2009-06-20 01:39:57Z peace-maker $
+ * @version $Id$
  * =============================================================================
  */
 

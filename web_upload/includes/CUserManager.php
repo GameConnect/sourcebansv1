@@ -9,7 +9,7 @@
  * @package SourceBans
  * @link http://www.sourcebans.net
  * 
- * @version $Id: CUserManager.php 182 2008-12-18 19:12:19Z smithxxl $
+ * @version $Id$
  * =============================================================================
  */
 

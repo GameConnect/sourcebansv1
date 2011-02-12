@@ -9,7 +9,7 @@
  * @package SourceBans
  * @link http://www.sourcebans.net
  *
- * @version $Id: user-functions.php 183 2008-12-19 04:36:36Z smithxxl $
+ * @version $Id$
  * =============================================================================
  */
 

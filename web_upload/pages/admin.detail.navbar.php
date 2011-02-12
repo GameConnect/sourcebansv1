@@ -9,7 +9,7 @@
  * @package SourceBans
  * @link http://www.sourcebans.net
  * 
- * @version $Id: admin.detail.navbar.php 24 2007-11-06 18:17:05Z olly $
+ * @version $Id$
  * =============================================================================
  */
 
