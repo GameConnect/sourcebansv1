@@ -1,36 +1,26 @@
-<?php 
-/**
- * =============================================================================
- * Main loader file
- * 
- * @author SteamFriends Development Team
- * @version 1.0.0
- * @copyright SourceBans (C)2007 SteamFriends.com.  All rights reserved.
- * @package SourceBans
- * @link http://www.sourcebans.net
- * 
- * @version $Id: index.php 24 2007-11-06 18:17:05Z olly $
- * =============================================================================
- */
+<?php
+require_once 'api.php';
 
-include_once 'init.php';
-include_once(INCLUDES_PATH . "/user-functions.php");
-include_once(INCLUDES_PATH . "/system-functions.php");
-include_once('config.php');
-include_once(INCLUDES_PATH . "/sb-callback.php");
-$xajax->processRequests();
-session_start();
-include_once(INCLUDES_PATH . "/page-builder.php");
+$config = Env::get('config');
 
+switch($config['config.defaultpage'])
+{
+  case 1:
+    $active = 'banlist.php';
+    break;
+  case 2:
+    $active = 'servers.php';
+    break;
+  case 3:
+    $active = 'submitban.php';
+    break;
+  case 4:
+    $active = 'protestban.php';
+    break;
+  default:
+    $active = 'dashboard.php';
+}
 
-
-
-
-
-
-
-
-
-//Yarr!
-
+Env::set('active', $active);
+require_once $active;
 ?>

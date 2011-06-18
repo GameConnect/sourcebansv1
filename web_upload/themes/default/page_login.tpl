@@ -1,40 +1,22 @@
-<div id="login"> 
-	<div id="login-content">
-	  	<div id="loginUsernameDiv">
-	    	<label for="loginUsername">Username:</label><br />
-	    	<input id="loginUsername" class="loginmedium" type="text" name="username"value="" />
-		</div>
-		<div id="loginUsername.msg" class="badentry"></div>
-  		
-		<div id="loginPasswordDiv">
-	    	<label for="loginPassword">Password:</label><br />
-	   		<input id="loginPassword" class="loginmedium" type="password" name="password" value="" />
-		</div>
-		<div id="loginPassword.msg" class="badentry"></div>
-	  	
-		<div id="loginRememberMeDiv">
-	    	<input id="loginRememberMe" type="checkbox" class="checkbox" name="remember" value="checked" vspace="5px" />    <span class="checkbox" style="cursor:pointer;" onclick="($('loginRememberMe').checked?$('loginRememberMe').checked=false:$('loginRememberMe').checked=true)">Remember me</span>
-  		</div>
-		
-  		<div id="loginSubmit">	
-			-{sb_button text="Login" onclick=$redir class="ok" id="alogin" submit=false}-
-		</div>
-		
-		<div id="loginOtherlinks">
-			<a href="?">Back to the Homepage</a> - <a href="index.php?p=lostpassword">Lost your password?</a>
-		</div>
-	</div>
-</div>
-	
-<script>
-	$E('html').onkeydown = function(event){
-	    var event = new Event(event);
-	    if (event.key == 'enter' ) -{$redir}-
-	};$('loginRememberMeDiv').onkeydown = function(event){
-	    var event = new Event(event);
-	    if (event.key == 'space' ) $('loginRememberMeDiv').checked = true;
-	};$('button').onkeydown = function(event){
-	    var event = new Event(event);
-	    if (event.key == 'space' ) -{$redir}-
-	};
-</script>
+          <form action="{$active}" id="login" method="post">
+            <fieldset>
+              <div id="loginUsernameDiv">
+                <label for="username">{$lang_username}:</label>
+                <input class="loginmedium" {nid id="username"} />
+              </div>
+              <div id="loginPasswordDiv">
+                <label for="password">{$lang_password}:</label>
+                <input class="loginmedium" {nid id="password"} type="password" />
+              </div>
+              <div id="loginRememberMe">
+                <input checked="checked" class="checkbox" {nid id="remember"} type="checkbox" />
+                <label class="checkbox" for="remember">{$lang_remember_me}</label>
+              </div>
+              <div id="loginSubmit">
+                <input class="btn ok" type="submit" value="{$lang_login}" />
+              </div>
+              <div id="loginOtherlinks">
+                <a href="{build_url _=index.php}">Back to the homepage</a> - <a href="{build_url _=lostpassword.php}">Lost your password?</a>
+              </div>
+            </fieldset>
+          </form>

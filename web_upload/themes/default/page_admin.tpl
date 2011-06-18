@@ -1,102 +1,65 @@
-<h3>Please select an option to administer.</h3>
-<div id="cpanel">
-	<ul>
-		{if $access_admins}
-			<li>
-				<a href="index.php?p=admin&amp;c=admins">
-				<img src="themes/default/images/admin/admins.png" alt="Admin Settings" border="0" /><br />
-				Admin Settings
-		  		</a>
-			</li>
-		{/if}
-		{if $access_servers}
-			<li>
-				<a href="index.php?p=admin&amp;c=servers">
-				<img src="themes/default/images/admin/servers.png" alt="Server Admin" border="0" /><br />
-				Server Settings
-		  		</a>
-			</li>
-		{/if}
-		{if $access_bans}
-			<li>
-				<a href="index.php?p=admin&amp;c=bans">
-				<img src="themes/default/images/admin/bans.png" alt="Edit Bans" border="0" /><br />
-				Bans
-		  		</a>
-			</li>
-		{/if}
-		{if $access_groups}
-			<li>
-				<a href="index.php?p=admin&amp;c=groups">
-				<img src="themes/default/images/admin/groups.png" alt="Edit Groups" border="0" /><br />
-				Group Settings
-		  		</a>
-			</li>
-		{/if}
-		{if $access_settings}
-			<li>
-				<a href="index.php?p=admin&amp;c=settings">
-				<img src="themes/default/images/admin/settings.png" alt="SourceBans Settings" border="0" /><br />
-				Webpanel Settings
-		  		</a> 
-			</li>
-		{/if}
-		{if $access_mods}
-			<li>
-				<a href="index.php?p=admin&amp;c=mods">
-				<img src="themes/default/images/admin/mods.png" alt="Mods" border="0" /><br />
-				Manage Mods
-		  		</a>
-			</li>
-		{/if}
-	</ul>
-</div>	
-<br />
-
-<table width="100%" border="0" cellpadding="3" cellspacing="0">
-	<tr>
-		<td width="33%" align="center"><h3>Version Information</h3></td>
-		<td width="33%" align="center"><h3>Admin Information</h3></td>
-		<td width="33%" align="center"><h3>Ban Information</h3></td>
-	</tr>
-	<tr>
-		<td>Latest release: <strong id='relver'>Please Wait...</strong></td>
-		<td>Total admins: <strong>{$total_admins}</strong></td>
-		<td>Total bans: <strong>{$total_bans}</strong></td>
-	</tr>
-	<tr>
-		<td>
-			{if $sb_svn}
-				Latest SVN: <strong id='svnrev'>Please Wait...</strong>
-			{/if}		
-		</td>
-		<td>&nbsp;</td>
-		<td>Connection blocks: <strong>{$total_blocks}</strong></td>
-	</tr>
-	<tr>
-		<td id='versionmsg'>Please Wait...</td>
-		<td> <strong> </strong></td>
-		<td>Total demo size: <strong>{$demosize}</td>
-	</tr>
-	<tr>
-		<td width="33%" align="center"><h3>Server Information</h3></td>
-		<td width="33%" align="center"><h3>Protest Information</h3></td>
-		<td width="33%" align="center"><h3>Submission Information</h3></td>
-	</tr>
-	<tr>
-		<td>Total Servers: <strong>{$total_servers}</strong></td>
-		<td>Total protests: <strong>{$total_protests}</strong></td>
-		<td>Total submissions: <strong>{$total_submissions}</strong></td>
-	</tr>
-	<tr>
-		<td>&nbsp;</td>
-		<td>Archived protests: <strong>{$archived_protests}</strong></td>
-		<td>Archived submissions: <strong>{$archived_submissions}</strong></td>
-	</tr>
-	<tr>
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-		<td>&nbsp;</td>
-	</tr>
-</table>
-<script type="text/javascript">xajax_CheckVersion();</script>
+          <h3>Please select an option to administer.</h3>
+          <ul class="admin">
+            {if $user_permission_admins}
+            <li><a class="admins" href="{build_url _=admin_admins.php}">{$lang_admins}</a></li>
+            {/if}
+            {if $user_permission_bans}
+            <li><a class="bans" href="{build_url _=admin_bans.php}">{$lang_bans}</a></li>
+            {/if}
+            {if $user_permission_groups}
+            <li><a class="groups" href="{build_url _=admin_groups.php}">{$lang_groups}</a></li>
+            {/if}
+            {if $user_permission_mods}
+            <li><a class="mods" href="{build_url _=admin_mods.php}">{$lang_mods}</a></li>
+            {/if}
+            {if $user_permission_servers}
+            <li><a class="servers" href="{build_url _=admin_servers.php}">{$lang_servers}</a></li>
+            {/if}
+            {if $user_permission_settings}
+            <li><a class="settings" href="{build_url _=admin_settings.php}">{$lang_settings}</a></li>
+            {/if}
+          </ul>
+          <table width="100%" cellpadding="3" cellspacing="0">
+            <tr>
+              <td width="33%" align="center"><h3>{$lang_version_information}</h3></td>
+              <td width="33%" align="center"><h3>{$lang_admin_information}</h3></td>
+              <td width="33%" align="center"><h3>{$lang_ban_information}</h3></td>
+            </tr>
+            <tr>
+              <td>{$lang_latest_release}: <strong id="relver">{$lang_please_wait}...</strong></td>
+              <td>{$lang_total_admins}: <strong>{$total_admins}</strong></td>
+              <td>{$lang_total_bans}: <strong>{$total_bans}</strong></td>
+            </tr>
+            <tr>
+              <td>
+                {if $sb_svn}
+                Latest SVN: <strong id="svnrev">{$lang_please_wait}...</strong>
+                {/if}
+              </td>
+              <td>&nbsp;</td>
+              <td>{$lang_connection_blocks}: <strong>{$total_blocks}</strong></td>
+            </tr>
+            <tr>
+              <td id="versionmsg">{$lang_please_wait}...</td>
+              <td>&nbsp;</td>
+              <td>{$lang_total_demo_size}: <strong>{$demosize}</strong></td>
+            </tr>
+            <tr>
+              <td width="33%" align="center"><h3>{$lang_server_information}</h3></td>
+              <td width="33%" align="center"><h3>{$lang_protest_information}</h3></td>
+              <td width="33%" align="center"><h3>{$lang_submission_information}</h3></td>
+            </tr>
+            <tr>
+              <td>{$lang_total_servers}: <strong>{$total_servers}</strong></td>
+              <td>{$lang_total_protests}: <strong>{$total_protests}</strong></td>
+              <td>{$lang_total_submissions}: <strong>{$total_submissions}</strong></td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td>{$lang_archived_protests}: <strong>{$total_archived_protests}</strong></td>
+              <td>{$lang_archived_submissions}: <strong>{$total_archived_submissions}</strong></td>
+            </tr>
+            <tr>
+              <td colspan="3">&nbsp;</td>
+            </tr>
+          </table>

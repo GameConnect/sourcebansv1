@@ -1,25 +1,29 @@
 <?php
-/**
- * =============================================================================
- * Fetch file demo file by demoid
- * 
- * @author SteamFriends Development Team
- * @version 1.0.0
- * @copyright SourceBans (C)2007 SteamFriends.com.  All rights reserved.
- * @package SourceBans
- * @link http://www.sourcebans.net
- * 
- * @version $Id: getdemo.php 24 2007-11-06 18:17:05Z olly $
- * =============================================================================
- */
+require_once 'api.php';
 
-include_once("init.php");
+$phrases = Env::get('phrases');
 
-$GLOBALS['db']->Execute("SET NAMES utf8"); 
-$st = $GLOBALS['db']->Prepare("SELECT `filename`, `origname` FROM ".DB_PREFIX."_demos WHERE demtype=? and demid=?");
-$res = $GLOBALS['db']->Execute($st,array($_GET['type'],$_GET['id']));
-header('Content-type: application/force-download');
-header('Content-Transfer-Encoding: Binary');
-header('Content-disposition: attachment; filename="'.$res->fields[1].'"');
-@readfile(SB_DEMOS . "/" . $res->fields[0]);
+try
+{
+  $db   = Env::get('db');
+  $demo = $db->GetRow('SELECT ban_id, type, filename
+                       FROM   ' . Env::get('prefix') . '_demos
+                       WHERE  id = ?',
+                       array($_GET['id']));
+  
+  if(!file_exists(DEMOS_DIR . $demo['type'] . $demo['ban_id'] . '_' . $demo['filename']))
+    throw new Exception($phrases['file_does_not_exist']);
+  
+  header('Content-type: application/force-download');
+  header('Content-Transfer-Encoding: Binary');
+  header('Content-disposition: attachment; filename="' . $demo['filename'] . '"');
+  readfile(DEMOS_DIR . $demo['type'] . $demo['ban_id'] . '_' . $demo['filename']);
+}
+catch(Exception $e)
+{
+  $page = new Page($phrases['error']);
+  
+  $page->assign('error', $e->getMessage());
+  $page->display('page_error');
+}
 ?>
