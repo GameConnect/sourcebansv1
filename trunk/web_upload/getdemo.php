@@ -30,7 +30,9 @@ if(!$demo)
   die('Demo not found.');
 }
 
-if(!file_exists(SB_DEMOS . "/" . $demo['filename']))
+$demo['filename'] = basename($demo['filename']);
+
+if(!in_array($demo['filename'], scandir(SB_DEMOS)) || !file_exists(SB_DEMOS . "/" . $demo['filename']))
 {
   die('File not found.');
 }
