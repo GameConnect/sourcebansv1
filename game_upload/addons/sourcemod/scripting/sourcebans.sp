@@ -195,15 +195,15 @@ public OnPluginStart()
 	BuildPath(Path_SM, logFile, sizeof(logFile), "logs/sourcebans.log");
 	g_bConnecting = true;
 	
-	// Catch config error and show link to FAQ
+	// Catch config error
 	if(!SQL_CheckConfig("sourcebans"))
 	{
 		if(ReasonMenuHandle != INVALID_HANDLE)
 			CloseHandle(ReasonMenuHandle);
 		if(HackingMenuHandle != INVALID_HANDLE)
 			CloseHandle(HackingMenuHandle);
-		LogToFile(logFile, "Database failure: Could not find Database conf \"sourcebans\". See FAQ: http://sourcebans.net/node/19");
-		SetFailState("Database failure: Could not find Database conf \"sourcebans\"");
+		LogToFile(logFile, "Database failure: Could not find database config \"sourcebans\" in databases.cfg.");
+		SetFailState("Database failure: Could not find database config \"sourcebans\" in databases.cfg.");
 		return;
 	}
 	SQL_TConnect(GotDatabase, "sourcebans");
@@ -948,7 +948,7 @@ public GotDatabase(Handle:owner, Handle:hndl, const String:error[], any:data)
 {
 	if (hndl == INVALID_HANDLE)
 	{
-		LogToFile(logFile, "Database failure: %s. See FAQ: http://www.sourcebans.net/node/20", error);
+		LogToFile(logFile, "Database failure: %s", error);
 		g_bConnecting = false;
 		
 		// Parse the overrides backup!
