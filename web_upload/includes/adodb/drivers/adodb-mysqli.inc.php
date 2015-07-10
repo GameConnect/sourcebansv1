@@ -46,7 +46,7 @@ class ADODB_mysqli extends ADOConnection {
 	var $clientFlags = 0;
 	var $substr = "substring";
 	var $port = false;
-	var $socket = false;
+	var $socket = null;
 	var $_bindInputArray = false;
 	var $nameQuote = '`';		/// string to use to quote identifiers and names
 	var $optionFlags = array(array(MYSQLI_READ_DEFAULT_GROUP,0));
