@@ -3,11 +3,9 @@
  *
  * @author GameConnect
  * @version 1.5.0
- * @copyright SourceBans (C)2007-2013 GameConnect.net.  All rights reserved.
+ * @copyright SourceBans (C)2007-2016 GameConnect.net.  All rights reserved.
  * @package SourceBans
  * @link http://www.sourcebans.net
- *
- * @version $Id: sourcebans.inc 144 2013-02-07 00:30:23Z tsunami@gameconnect.net $
  */
 
 #if defined _sb_bans_included
@@ -16,29 +14,28 @@
 #define _sb_bans_included
 
 /**
- * Submits a ban to the SourceBans database
+ * Reports a player to SourceBans
  *
- * @param client		The index of the client
- * @param target		The index of the target
- * @param reason		The reason for the submission
- * @noreturn
+ * @param client	The index of the reporting client
+ * @param target	The index of the reported client
+ * @param reason	The reason for reporting the player
  */
-native SB_SubmitBan(client, target, const String:reason[]);
+native void SB_ReportPlayer(int client, int target, const char[] reason);
 
-public SharedPlugin:__pl_sb_bans = 
+public SharedPlugin __pl_sb_bans =
 {
-	name = "sb_bans",
-	file = "sb_bans.smx",
-	#if defined REQUIRE_PLUGIN
-	required = 1
-	#else
-	required = 0
-	#endif
+    name = "sb_bans",
+    file = "sb_bans.smx",
+    #if defined REQUIRE_PLUGIN
+    required = 1
+    #else
+    required = 0
+    #endif
 };
 
 #if !defined REQUIRE_PLUGIN
 public __pl_sourcebans_SetNTVOptional()
 {
-	MarkNativeAsOptional("SB_SubmitBan");
+    MarkNativeAsOptional("SB_ReportPlayer");
 }
 #endif
