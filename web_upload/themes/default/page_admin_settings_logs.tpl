@@ -17,9 +17,9 @@ Click on a row to see more details about the event.
 	{foreach from="$log_items" item="log"}
 	<tr class="opener tbl_out" onmouseout="this.className='tbl_out'" onmouseover="this.className='tbl_hover'">
 	    <td height="16" align="center" class="listtable_1">{$log.type_img}</td>
-	    <td height="16" class="listtable_1">{$log.title}</td>
-	    <td height="16" class="listtable_1">{$log.user}</td>
-	    <td height="16" class="listtable_1">{$log.date_str}</td>
+	    <td height="16" class="listtable_1">{$log.title|escape:'htmlall'}</td>
+	    <td height="16" class="listtable_1">{$log.user|escape:'htmlall'}</td>
+	    <td height="16" class="listtable_1">{$log.date_str|escape:'htmlall'}</td>
 	</tr>
 	<tr> 
         <td colspan="7" align="center">
@@ -32,19 +32,19 @@ Click on a row to see more details about the event.
           		</tr>
           		<tr align="left">
             		<td width="20%" height="16" class="listtable_1">Details</td>
-            		<td height="16" class="listtable_1">{$log.message}</td>
+            		<td height="16" class="listtable_1">{$log.message|escape:'htmlall'}</td>
             	</tr>
             	<tr align="left">
             		<td width="20%" height="16" class="listtable_1">Parent Function</td>
-            		<td height="16" class="listtable_1">{$log.function}</td>
+            		<td height="16" class="listtable_1">{$log.function|escape:'htmlall'}</td>
             	</tr>
             	<tr align="left">
             		<td width="20%" height="16" class="listtable_1">Query String</td>
-            		<td height="16" class="listtable_1">{textformat wrap=62 wrap_cut=true}{$log.query}{/textformat}</td>
+            		<td height="16" class="listtable_1">{textformat wrap=62 wrap_cut=true}{$log.query|escape:'htmlall'}{/textformat}</td>
             	</tr>
             	<tr align="left">
             		<td width="20%" height="16" class="listtable_1">IP</td>
-            		<td height="16" class="listtable_1">{$log.host}</td>
+            		<td height="16" class="listtable_1">{$log.host|escape:'htmlall'}</td>
             	</tr>
             </table>
           </div>
