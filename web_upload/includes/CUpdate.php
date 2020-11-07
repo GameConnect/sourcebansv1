@@ -17,7 +17,7 @@
  {
 	var $store=0;
 	
-	function CUpdater()
+	public function __construct()
 	{
 		if(!is_numeric($this->getCurrentRevision()))
 		{			
