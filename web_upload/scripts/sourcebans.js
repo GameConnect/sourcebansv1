@@ -1076,11 +1076,13 @@ function TabToReload()
 
 
 function toggleMCE(id) {
-	var elm = document.getElementById(id);
-	if (tinyMCE.getInstanceById(id) == null)
-		tinyMCE.execCommand('mceAddControl', false, id);
-	else
-		tinyMCE.execCommand('mceRemoveControl', false, id);
+	if (tinymce.get(id) == null) {
+		tinymce.EditorManager.execCommand('mceAddControl', false, id);
+		tinymce.EditorManager.execCommand('mceAddEditor', false, id);
+	} else {
+		tinymce.EditorManager.execCommand('mceRemoveControl', false, id);
+		tinymce.EditorManager.execCommand('mceRemoveEditor', false, id);
+	}
 }
 
 function CheckEmail(type, id)

@@ -28,20 +28,13 @@ if(!defined("IN_SB"))
 
 if(isset($_GET['c']) && $_GET['c']  == "settings")
 {
-	$theme->assign('tiny_mce_js', '<script type="text/javascript" src="./includes/tinymce/tiny_mce.js"></script>
+	$theme->assign('tiny_mce_js', '<script type="text/javascript" src="./includes/tinymce/tinymce.min.js"></script>
 					<script language="javascript" type="text/javascript">
 					tinyMCE.init({
-						mode : "textareas",
-						theme : "advanced",
-						plugins : "inlinepopups,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,insertdatetime,preview,zoom,media,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras",
-						theme_advanced_buttons1 : "bold,italic,underline,|,justifyleft,justifycenter,justifyright,justifyfull,|,fontselect,fontsizeselect",
-						theme_advanced_buttons2 : "cut,copy,paste,|,search,replace,|,bullist,numlist,|,outdent,indent,|,undo,redo,|,link,unlink,anchor,image,help,code,|,forecolor,backcolor",
-						theme_advanced_buttons3 : "tablecontrols,|,hr,removeformat,visualaid,|,charmap,emotions,iespell,media",
-						theme_advanced_buttons4 : "insertlayer,moveforward,movebackward,absolute,|,styleprops,|,cite,abbr,acronym,del,ins,|,visualchars,nonbreaking",
-						theme_advanced_toolbar_location : "top",
-						theme_advanced_toolbar_align : "left",
-						theme_advanced_path_location : "bottom",
-						extended_valid_elements : "a[name|href|target|title|onclick],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name],hr[class|width|size|noshade],font[face|size|color|style],span[class|align|style]"
+						selector: "textarea",
+						branding: false,
+						height: 500,
+						plugins: "advlist autolink lists link image charmap print preview hr anchor pagebreak searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking save table directionality emoticons template paste textpattern imagetools codesample toc",
 					});
 					</script>');
 } else
