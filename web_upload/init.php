@@ -52,9 +52,11 @@ if(trim($_SERVER['PHP_SELF']) == '') $_SERVER['PHP_SELF'] = preg_replace("/(\?.*
 // ---------------------------------------------------
 //  Are we installed?
 // ---------------------------------------------------
+$httpHost = strtok($_SERVER['HTTP_HOST'], ':');
+
 if(!file_exists(ROOT.'/config.php') || !include_once(ROOT . '/config.php')) {
 	// No were not
-	if($_SERVER['HTTP_HOST'] != "localhost")
+	if($httpHost != "localhost")
 	{
 		echo "SourceBans is not installed.";
 		die();
@@ -62,7 +64,7 @@ if(!file_exists(ROOT.'/config.php') || !include_once(ROOT . '/config.php')) {
 }
 if(!defined("DEVELOPER_MODE") && !defined("IS_UPDATE") && file_exists(ROOT."/install"))
 {
-	if($_SERVER['HTTP_HOST'] != "localhost")
+	if($httpHost != "localhost")
 	{
 		echo "Please delete the install directory before you use SourceBans";
 		die();
@@ -71,7 +73,7 @@ if(!defined("DEVELOPER_MODE") && !defined("IS_UPDATE") && file_exists(ROOT."/ins
 
 if(!defined("DEVELOPER_MODE") && !defined("IS_UPDATE") && file_exists(ROOT."/updater"))
 {
-	if($_SERVER['HTTP_HOST'] != "localhost")
+	if($httpHost != "localhost")
 	{
 		echo "Please delete the updater directory before using SourceBans";
 		die();

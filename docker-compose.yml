@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+    nginx:
+        image: bitnami/nginx:1.18
+        depends_on:
+            - php-fpm
+        ports:
+            - 8080:8080
+        volumes:
+            - ./web_upload:/app:cached
+            - ./docker/nginx.conf:/opt/bitnami/nginx/conf/server_blocks/default.conf:ro
+
+    php-fpm:
+        image: bitnami/php-fpm:7.4
+        volumes:
+            - ./web_upload:/app:cached
+            - ./docker/php.ini:/opt/bitnami/php/etc/php.ini:ro
+
+    mariadb:
+        image: bitnami/mariadb:10.5
+        env_file: ./docker/.env
+        ports:
+            - 3306:3306
+
+    composer:
+        image: composer:2.0
+        volumes:
+            - ./web_upload:/app:cached
