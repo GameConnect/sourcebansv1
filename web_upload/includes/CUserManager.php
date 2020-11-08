@@ -15,8 +15,8 @@
 
 class CUserManager
 {
-	var $aid = -1;
-	var $admins = array();
+	private $aid = -1;
+	private $admins = array();
 	
 	/**
 	 * Class constructor
@@ -44,7 +44,7 @@ class CUserManager
 	 * @param $aid the ID of admin to get info for.
 	 * @return array.
 	 */
-	function GetUserArray($aid=-2)
+	public function GetUserArray($aid=-2)
 	{
 		if($aid == -2)
 			$aid = $this->aid;	
@@ -101,7 +101,7 @@ class CUserManager
 	 * @param $aid The user to check flags for.
 	 * @return boolean.
 	 */
-	function HasAccess($flags, $aid=-2)
+	public function HasAccess($flags, $aid=-2)
 	{
 		if($aid == -2)
 			$aid = $this->aid;
@@ -138,7 +138,7 @@ class CUserManager
 	 * @param $aid the ID of admin to get info for.
 	 * @return mixed.
 	 */
-	function GetProperty($name, $aid=-2)
+	public function GetProperty($name, $aid=-2)
 	{
 		if($aid == -2)
 			$aid = $this->aid;
@@ -160,7 +160,7 @@ class CUserManager
 	 * @param $aid the admins aid
 	 * @return boolean.
 	 */
-	function CheckLogin($password, $aid)
+	public function CheckLogin($password, $aid)
 	{
 		$aid = (int)$aid;
 
@@ -179,7 +179,7 @@ class CUserManager
 	}
 	
 	
-	function login($aid, $password, $save = true)
+	public function login($aid, $password, $save = true)
 	{
 	    if($this->CheckLogin($this->encrypt_password($password), $aid))
 	    {
@@ -212,12 +212,12 @@ class CUserManager
 	 * @param $password password to encrypt.
 	 * @return string.
 	 */
-	function encrypt_password($password, $salt=SB_SALT)
+	public function encrypt_password($password, $salt=SB_SALT)
 	{
 		return sha1(sha1($salt . $password));
 	}
 	
-	function is_logged_in()
+	public function is_logged_in()
 	{
 		if($this->aid != -1)
 			return true;
@@ -226,7 +226,7 @@ class CUserManager
 	}
 	
 	
-	function is_admin($aid=-2)
+	public function is_admin($aid=-2)
 	{
 		if($aid == -2)
 			$aid = $this->aid;
@@ -238,13 +238,13 @@ class CUserManager
 	}
 	
 	
-	function GetAid()
+	public function GetAid()
 	{
 		return $this->aid;
 	}
 	
 	
-	function GetAllAdmins()
+	public function GetAllAdmins()
 	{
 		$res = $GLOBALS['db']->GetAll("SELECT aid FROM " . DB_PREFIX . "_admins");
 		foreach($res AS $admin)
@@ -253,7 +253,7 @@ class CUserManager
 	}
 	
 	
-	function GetAdmin($aid=-2)
+	public function GetAdmin($aid=-2)
 	{
 		if($aid == -2)
 			$aid = $this->aid;
@@ -268,7 +268,7 @@ class CUserManager
 	}
 	
 	
-	function AddAdmin($name, $steam, $password, $email, $web_group, $web_flags, $srv_group, $srv_flags, $immunity, $srv_password)
+	public function AddAdmin($name, $steam, $password, $email, $web_group, $web_flags, $srv_group, $srv_flags, $immunity, $srv_password)
 	{		
 		$add_admin = $GLOBALS['db']->Prepare("INSERT INTO ".DB_PREFIX."_admins(user, authid, password, gid, email, extraflags, immunity, srv_group, srv_flags, srv_password)
 											 VALUES (?,?,?,?,?,?,?,?,?,?)");

@@ -73,20 +73,20 @@ class xajaxResponse
 	/**
 	 * @var array internal command storage
 	 */    
-	var $aCommands;
+	private $aCommands;
 	/**
 	 * @var string internal XML storage
 	 */	
-	var $xml;
+	private $xml;
 	/**
 	 * @var string the encoding type to use
 	 */
-	var $sEncoding;
+	private $sEncoding;
 	/**
 	 * @var boolean if special characters in the XML should be converted to
 	 *              entities
 	 */
-	var $bOutputEntities;
+	private $bOutputEntities;
 
 	/**#@-*/
 	
@@ -119,7 +119,7 @@ class xajaxResponse
 	 * 
 	 * @param string
 	 */
-	function setCharEncoding($sEncoding)
+	public function setCharEncoding($sEncoding)
 	{
 		$this->sEncoding = $sEncoding;
 	}
@@ -129,7 +129,7 @@ class xajaxResponse
 	 * entities automatically (only works if the mb_string extension is
 	 * available).
 	 */
-	function setOutputEntities($bOption)
+	public function setOutputEntities($bOption)
 	{
 		$this->bOutputEntities = (boolean)$bOption;
 		return $this;
@@ -139,7 +139,7 @@ class xajaxResponse
 	 * Tells the response object to convert special characters to HTML entities
 	 * automatically (only works if the mb_string extension is available).
 	 */
-	function outputEntitiesOn()
+	public function outputEntitiesOn()
 	{
 		return ($this->setOutputEntities(true));
 	}
@@ -148,7 +148,7 @@ class xajaxResponse
 	 * Tells the response object to output special characters intact. (default
 	 * behavior)
 	 */
-	function outputEntitiesOff()
+	public function outputEntitiesOff()
 	{
 		return ($this->setOutputEntities(false));
 	}
@@ -162,13 +162,13 @@ class xajaxResponse
 	 *                Cancel in the browsers's confirm dialog
 	 * @param string  the message to show in the browser's confirm dialog
 	 */
-	function addConfirmCommands($iCmdNumber, $sMessage)
+	public function addConfirmCommands($iCmdNumber, $sMessage)
 	{
 		$this->addCommand(array('n'=>'cc','t'=>$iCmdNumber),$sMessage);
 	    return $this;
 	}
 	
-	function confirmCommands($iCmdNumber, $sMessage)
+	public function confirmCommands($iCmdNumber, $sMessage)
 	{
 		return $this->addConfirmCommands($iCmdNumber, $sMessage);
 	}
@@ -183,13 +183,13 @@ class xajaxResponse
 	 *               "value", etc.)
 	 * @param string the data you want to set the attribute to
 	 */
-	function addAssign($sTarget,$sAttribute,$sData)
+	public function addAssign($sTarget,$sAttribute,$sData)
 	{
 		$this->addCommand(array('n'=>'as','t'=>$sTarget,'p'=>$sAttribute),$sData);
 		return $this;
 	}
 	
-	function assign($sTarget,$sAttribute,$sData)
+	public function assign($sTarget,$sAttribute,$sData)
 	{
 		return $this->addAssign($sTarget,$sAttribute,$sData);
 	}
@@ -204,13 +204,13 @@ class xajaxResponse
 	 *               "value", etc.)
 	 * @param string the data you want to append to the end of the attribute
 	 */
-	function addAppend($sTarget,$sAttribute,$sData)
+	public function addAppend($sTarget,$sAttribute,$sData)
 	{	
 		$this->addCommand(array('n'=>'ap','t'=>$sTarget,'p'=>$sAttribute),$sData);
 		return $this;
 	}
 	
-	function append($sTarget,$sAttribute,$sData)
+	public function append($sTarget,$sAttribute,$sData)
 	{
 		return $this->addAppend($sTarget,$sAttribute,$sData);
 	}
@@ -226,13 +226,13 @@ class xajaxResponse
 	 * @param string the data you want to prepend to the beginning of the
 	 *               attribute
 	 */
-	function addPrepend($sTarget,$sAttribute,$sData)
+	public function addPrepend($sTarget,$sAttribute,$sData)
 	{
 		$this->addCommand(array('n'=>'pp','t'=>$sTarget,'p'=>$sAttribute),$sData);
 		return $this;
 	}
 	
-	function prepend($sTarget,$sAttribute,$sData)
+	public function prepend($sTarget,$sAttribute,$sData)
 	{
 		return $this->addPrepend($sTarget,$sAttribute,$sData);
 	}
@@ -249,7 +249,7 @@ class xajaxResponse
 	 * @param string the string to replace the search string when found in the
 	 *               attribute
 	 */
-	function addReplace($sTarget,$sAttribute,$sSearch,$sData)
+	public function addReplace($sTarget,$sAttribute,$sSearch,$sData)
 	{
 		$aData[] = array('k'=>'s','v'=>$sSearch);
 		$aData[] = array('k'=>'r','v'=>$sData);
@@ -257,7 +257,7 @@ class xajaxResponse
 		return $this;
 	}
 
-	function replace($sTarget,$sAttribute,$sSearch,$sData)
+	public function replace($sTarget,$sAttribute,$sSearch,$sData)
 	{
 		return $this->addReplace($sTarget,$sAttribute,$sSearch,$sData);
 	}
@@ -271,13 +271,13 @@ class xajaxResponse
 	 * @param string the part of the element you wish to clear ("innerHTML",
 	 *               "value", etc.)
 	 */	
-	function addClear($sTarget,$sAttribute)
+	public function addClear($sTarget,$sAttribute)
 	{
 		$this->assign($sTarget,$sAttribute,'');
 		return $this;
 	}
 	
-	function clear($sTarget,$sAttribute)
+	public function clear($sTarget,$sAttribute)
 	{
 		return $this->addClear($sTarget,$sAttribute);
 	}
@@ -289,13 +289,13 @@ class xajaxResponse
 	 * 
 	 * @param string the text to be displayed in the Javascript alert box
 	 */
-	function addAlert($sMsg)
+	public function addAlert($sMsg)
 	{
 		$this->addCommand(array('n'=>'al'),$sMsg);
 		return $this;
 	}
 	
-	function alert($sMsg)
+	public function alert($sMsg)
 	{
 		return $this->addAlert($sMsg);
 	}
@@ -307,7 +307,7 @@ class xajaxResponse
 	 * 
 	 * @param string the URL to redirect the client browser to
 	 */   
-	function addRedirect($sURL, $iDelay=0)
+	public function addRedirect($sURL, $iDelay=0)
 	{
 		//we need to parse the query part so that the values are rawurlencode()'ed
 		//can't just use parse_url() cos we could be dealing with a relative URL which
@@ -349,7 +349,7 @@ class xajaxResponse
 		return $this;
 	}
 	
-	function redirect($sURL, $iDelay=0)
+	public function redirect($sURL, $iDelay=0)
 	{
 		return $this->addRedirect($sURL, $iDelay);
 	}
@@ -361,13 +361,13 @@ class xajaxResponse
 	 * 
 	 * @param string contains Javascript code to be executed
 	 */
-	function addScript($sJS)
+	public function addScript($sJS)
 	{
 		$this->addCommand(array('n'=>'js'),$sJS);
 		return $this;
 	}
 	
-	function script($sJS)
+	public function script($sJS)
 	{
 		return $this->addScript($sJS);
 	}
@@ -380,7 +380,7 @@ class xajaxResponse
 	 * @param string $sFunc the name of a Javascript function
 	 * @param mixed $args,... optional arguments to pass to the Javascript function
 	 */
-	function addScriptCall()
+	public function addScriptCall()
 	{
 		$aArgs = func_get_args();
 	    $sFunc = array_shift($aArgs);
@@ -389,7 +389,7 @@ class xajaxResponse
 	    return $this;
 	}
 	
-	function call()
+	public function call()
 	{
 		$aArgs = func_get_args();
 		return call_user_func_array(array(&$this, 'addScriptCall'), $aArgs);
@@ -402,13 +402,13 @@ class xajaxResponse
 	 * 
 	 * @param string contains the id of an HTML element to be removed
 	 */
-	function addRemove($sTarget)
+	public function addRemove($sTarget)
 	{
 		$this->addCommand(array('n'=>'rm','t'=>$sTarget),'');
 		return $this;
 	}
 	
-	function remove($sTarget)
+	public function remove($sTarget)
 	{
 		return $this->addRemove($sTarget);
 	}
@@ -424,7 +424,7 @@ class xajaxResponse
 	 * @param string the id to be assigned to the new element
 	 * @param string deprecated, use the addCreateInput() method instead
 	 */
-	function addCreate($sParent, $sTag, $sId, $sType="")
+	public function addCreate($sParent, $sTag, $sId, $sType="")
 	{
 		if ($sType)
 		{
@@ -435,7 +435,7 @@ class xajaxResponse
 		return $this;
 	}
 	
-	function create($sParent, $sTag, $sId, $sType="")
+	public function create($sParent, $sTag, $sId, $sType="")
 	{
 		return $this->addCreate($sParent, $sTag, $sId, $sType);
 	}
@@ -450,13 +450,13 @@ class xajaxResponse
 	 * @param string the tag to be added
 	 * @param string the id to be assigned to the new element
 	 */
-	function addInsert($sBefore, $sTag, $sId)
+	public function addInsert($sBefore, $sTag, $sId)
 	{
 		$this->addCommand(array('n'=>'ie','t'=>$sBefore,'p'=>$sId),$sTag);
 		return $this;
 	}
 	
-	function insert($sBefore, $sTag, $sId)
+	public function insert($sBefore, $sTag, $sId)
 	{
 		return $this->addInsert($sBefore, $sTag, $sId);
 	}
@@ -471,13 +471,13 @@ class xajaxResponse
 	 * @param string the tag to be added
 	 * @param string the id to be assigned to the new element
 	 */
-	function addInsertAfter($sAfter, $sTag, $sId)
+	public function addInsertAfter($sAfter, $sTag, $sId)
 	{
 		$this->addCommand(array('n'=>'ia','t'=>$sAfter,'p'=>$sId),$sTag);
 		return $this;
 	}
 	
-	function insertAfter($sAfter, $sTag, $sId)
+	public function insertAfter($sAfter, $sTag, $sId)
 	{
 		return $this->addInsertAfter($sAfter, $sTag, $sId);
 	}
@@ -495,13 +495,13 @@ class xajaxResponse
 	 *               name when it is submitted
 	 * @param string the id to be assigned to the new input
 	 */
-	function addCreateInput($sParent, $sType, $sName, $sId)
+	public function addCreateInput($sParent, $sType, $sName, $sId)
 	{
 		$this->addCommand(array('n'=>'ci','t'=>$sParent,'p'=>$sId,'c'=>$sType),$sName);
 		return $this;
 	}
 	
-	function createInput($sParent, $sType, $sName, $sId)
+	public function createInput($sParent, $sType, $sName, $sId)
 	{
 		return $this->addCreateInput($sParent, $sType, $sName, $sId);
 	}
@@ -519,13 +519,13 @@ class xajaxResponse
 	 *               name when it is submitted
 	 * @param string the id to be assigned to the new input
 	 */
-	function addInsertInput($sBefore, $sType, $sName, $sId)
+	public function addInsertInput($sBefore, $sType, $sName, $sId)
 	{
 		$this->addCommand(array('n'=>'ii','t'=>$sBefore,'p'=>$sId,'c'=>$sType),$sName);
 		return $this;
 	}
 	
-	function insertInput($sBefore, $sType, $sName, $sId)
+	public function insertInput($sBefore, $sType, $sName, $sId)
 	{
 		return $this->addInsertInput($sBefore, $sType, $sName, $sId);
 	}
@@ -543,13 +543,13 @@ class xajaxResponse
 	 *               name when it is submitted
 	 * @param string the id to be assigned to the new input
 	 */
-	function addInsertInputAfter($sAfter, $sType, $sName, $sId)
+	public function addInsertInputAfter($sAfter, $sType, $sName, $sId)
 	{
 		$this->addCommand(array('n'=>'iia','t'=>$sAfter,'p'=>$sId,'c'=>$sType),$sName);
 	    return $this;
 	}
 	
-	function insertInputAfter($sAfter, $sType, $sName, $sId)
+	public function insertInputAfter($sAfter, $sType, $sName, $sId)
 	{
 		return $this->addInsertInputAfter($sAfter, $sType, $sName, $sId);
 	}
@@ -563,7 +563,7 @@ class xajaxResponse
 	 * @param string the event you wish to set ("onclick", "onmouseover", etc.)
 	 * @param string the Javascript string you want the event to invoke
 	 */
-	function addEvent($sTarget,$sEvent,$sScript)
+	public function addEvent($sTarget,$sEvent,$sScript)
 	{
 		$this->addCommand(array('n'=>'ev','t'=>$sTarget,'p'=>$sEvent),$sScript);
 		return $this;
@@ -579,7 +579,7 @@ class xajaxResponse
 	 * @param string the name of a Javascript function that will handle the
 	 *               event. Multiple handlers can be added for the same event
 	 */
-	function addHandler($sTarget,$sEvent,$sHandler)
+	public function addHandler($sTarget,$sEvent,$sHandler)
 	{	
 		$this->addCommand(array('n'=>'ah','t'=>$sTarget,'p'=>$sEvent),$sHandler);
 		return $this;
@@ -596,13 +596,13 @@ class xajaxResponse
 	 * @param string the name of a Javascript handler function that you want to
 	 *               remove
 	 */
-	function addRemoveHandler($sTarget,$sEvent,$sHandler)
+	public function addRemoveHandler($sTarget,$sEvent,$sHandler)
 	{	
 		$this->addCommand(array('n'=>'rh','t'=>$sTarget,'p'=>$sEvent),$sHandler);
 		return $this;
 	}
 	
-	function removeHandler($sTarget,$sEvent,$sHandler)
+	public function removeHandler($sTarget,$sEvent,$sHandler)
 	{
 		return $this->addRemoveHandler($sTarget,$sEvent,$sHandler);
 	}
@@ -614,13 +614,13 @@ class xajaxResponse
 	 * 
 	 * @param string URL of the Javascript file to include
 	 */
-	function addIncludeScript($sFileName)
+	public function addIncludeScript($sFileName)
 	{
 		$this->addCommand(array('n'=>'in'),$sFileName);
 		return $this;
 	}
 	
-	function includeScript($sFilename)
+	public function includeScript($sFilename)
 	{
 		return $this->addIncludeScript($sFileName);
 	}
@@ -635,7 +635,7 @@ class xajaxResponse
 	 * 
 	 * @return string response XML data
 	 */
-	function getOutput()
+	public function getOutput()
 	{
 		$xml = "";
 		if (is_array($this->aCommands))
@@ -660,7 +660,7 @@ class xajaxResponse
 		return '<?xml version="1.0"'.$encoding.' ?'.'><xjx>'.$xml.'</xjx>';
 	}
 	
-	function getXML()
+	public function getXML()
 	{
 		return $this;
 	}
@@ -677,7 +677,7 @@ class xajaxResponse
 	 * @param string the response XML (returned from a getXML() method) to add
 	 *               to the end of this response object
 	 */
-	function loadXML($mCommands)
+	public function loadXML($mCommands)
 	{
 		if (is_a($mCommands, 'xajaxResponse')) {
 			$this->aCommands = array_merge($this->aCommands, $mCommands->aCommands);
@@ -694,7 +694,7 @@ class xajaxResponse
 		}
 	}
 	
-	function loadCommands($mCommands)
+	public function loadCommands($mCommands)
 	{
 		return $this->loadXML($mCommands);
 	}
@@ -707,7 +707,7 @@ class xajaxResponse
 	 * @param string data
 	 * @return string XML command
 	 */
-	function _cmdXML($aAttributes, $sData)
+	private function _cmdXML($aAttributes, $sData)
 	{
 		if ($this->bOutputEntities) {
 			if (function_exists('mb_convert_encoding')) {
@@ -738,7 +738,7 @@ class xajaxResponse
 	 * @param mixed data
 	 * @return string XML command
 	 */
-	function _getXMLForCommand($aAttributes, $mData)
+	private function _getXMLForCommand($aAttributes, $mData)
 	{
 		$xml = '<cmd';
 		foreach($aAttributes as $sAttribute => $sValue)
@@ -760,7 +760,7 @@ class xajaxResponse
 	 * @param mixed associative array of data or string of data
 	 * @return string XML command
 	 */
-	function _arrayToXML($mArray) {
+	private function _arrayToXML($mArray) {
 		if (!is_array($mArray))
 			return $this->_escape($mArray);
 		
@@ -793,7 +793,7 @@ class xajaxResponse
 	 * @param array associative array of attributes
 	 * @param mixed data
 	 */
-	function addCommand($aAttributes, $mData)
+	public function addCommand($aAttributes, $mData)
 	{
 		$aAttributes['data'] = $mData;
 		$this->aCommands[] = $aAttributes;
@@ -807,7 +807,7 @@ class xajaxResponse
 	 * @param string data
 	 * @return string escaped data
 	 */
-	function _escape($sData)
+	private function _escape($sData)
 	{
 		if (!is_numeric($sData) && !$sData)
 			return '';
@@ -856,7 +856,7 @@ class xajaxResponse
 	 * @param mixed data structure to serialize
 	 * @return array data ready for insertion into command list array
 	 */
-	function _buildObj($mData) {
+	private function _buildObj($mData) {
 	    if (gettype($mData) == 'object')
 			$mData = get_object_vars($mData);
 		

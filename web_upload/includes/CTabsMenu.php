@@ -14,9 +14,9 @@
  */
 
 class CTabsMenu {
-	var $menuItems = array( );
+	private $menuItems = array( );
 	
-	function addMenuItem($title, $id, $description="", $url="", $external=false)
+	public function addMenuItem($title, $id, $description="", $url="", $external=false)
 	{
 		$curItem = array();
 		$curItem['title'] = $title;
@@ -27,13 +27,13 @@ class CTabsMenu {
 		array_push($this->menuItems, $curItem);
 	}
 	
-	function outputMenu()
+	public function outputMenu()
 	{
 		$var = $this->menuItems;
 		include TEMPLATES_PATH . "/admin.detail.navbar.php";
 	}
 	
-	function getMenuArray()
+	public function getMenuArray()
 	{
 		return $this->menuItems;
 	}

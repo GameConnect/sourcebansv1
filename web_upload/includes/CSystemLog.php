@@ -14,15 +14,15 @@
  */
 
 class CSystemLog {
-	var $log_list = array();
-	var $type = "";
-	var $title = "";
-	var $msg = "";
-	var $aid = 0;
-	var $host = "";
-	var $created = 0;
-	var $parent_function = "";
-	var $query = "";
+	private $log_list = array();
+	private $type = "";
+	private $title = "";
+	private $msg = "";
+	private $aid = 0;
+	private $host = "";
+	private $created = 0;
+	private $parent_function = "";
+	private $query = "";
 	
 	public function __construct($tpe="", $ttl="", $mg="", $done=true, $HideDebug = false)
 	{
@@ -50,7 +50,7 @@ class CSystemLog {
 		}				
 	}
 	
-	function AddLogItem($tpe, $ttl, $mg)
+	public function AddLogItem($tpe, $ttl, $mg)
 	{
 		$item = array();
 		$item['type'] = $tpe;
@@ -65,7 +65,7 @@ class CSystemLog {
 		array_push($this->log_list, $item);
 	}
 	
-	function WriteLogEntries()
+	public function WriteLogEntries()
 	{
 		$this->log_list = array_unique($this->log_list);
 		foreach($this->log_list as $logentry)
@@ -82,7 +82,7 @@ class CSystemLog {
 		unset($this->log_list);
 	}
 	
-	function WriteLog()
+	public function WriteLog()
 	{
 		if(!$this->query)
 			$this->query = "N/A";
@@ -94,7 +94,7 @@ class CSystemLog {
 		}
 	}
 	
-	function _getCaller()
+	private function _getCaller()
 	{
 		$bt = debug_backtrace();
 	
@@ -106,7 +106,7 @@ class CSystemLog {
 		return $functions;
 	}
 	
-	function GetAll($start, $limit, $searchstring="")
+	public function GetAll($start, $limit, $searchstring="")
 	{
 		if( !is_object($GLOBALS['db']) )
 				return false;
@@ -122,13 +122,13 @@ class CSystemLog {
 		return $sm_logs;
 	}
 	
-	function LogCount($searchstring="")
+	public function LogCount($searchstring="")
 	{
 		$sm_logs = $GLOBALS['db']->GetRow("SELECT count(l.lid) AS count FROM ".DB_PREFIX."_log AS l".$searchstring);
 		return $sm_logs[0];
 	}
 	
-	function CountLogList()
+	public function CountLogList()
 	{
 		return count($this->log_list);
 	}

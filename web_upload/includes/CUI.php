@@ -15,14 +15,14 @@
 
 class CUI
 {
-	function drawButton($text, $click, $class, $id="", $submit=false)
+	public function drawButton($text, $click, $class, $id="", $submit=false)
 	{
 		$type = $submit ? "submit" : "button";
 		$button = "<input type='$type' onclick=\"$click\" name='$id' class='btn $class' onmouseover='ButtonOver(\"$id\")' onmouseout='ButtonOver(\"$id\")' id='$id' value='$text' />";
 		return $button;
 	}
 	
-	function drawInlineBox($title, $text, $color)
+	public function drawInlineBox($title, $text, $color)
 	{
 		$icon = "";
 		switch($color)

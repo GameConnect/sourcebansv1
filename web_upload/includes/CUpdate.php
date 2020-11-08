@@ -15,7 +15,7 @@
  
  class CUpdater
  {
-	var $store=0;
+	private $store=0;
 	
 	public function __construct()
 	{
@@ -29,7 +29,7 @@
 		}
 	}
 	
-	function getLatestPackageVersion()
+	public function getLatestPackageVersion()
 	{
 		$retval = 0;
 		foreach($this->_getStore() as $version => $key)
@@ -40,7 +40,7 @@
 		return $retval;
 	}
 	
-	function doUpdates()
+	public function doUpdates()
 	{
 		$retstr = "";
 		$error = false;
@@ -78,17 +78,17 @@
 		return $retstr;
 	}
 	
-	function getCurrentRevision()
+	public function getCurrentRevision()
 	{
 		return (isset($GLOBALS['config']['config.version']))?$GLOBALS['config']['config.version']:-1;
 	}
 	
-	function needsUpdate()
+	public function needsUpdate()
 	{
 		return($this->getLatestPackageVersion() > $this->getCurrentRevision());
 	}
 	
-	function _getStore()
+	private function _getStore()
 	{
 		if($this->store==0)
 			return include ROOT . "/updater/store.php";
@@ -96,7 +96,7 @@
 			return $this->store;
 	}
 	
-	function _updateVersionNumber($rev)
+	private function _updateVersionNumber($rev)
 	{
 		$ret = $GLOBALS['db']->Execute("UPDATE ".DB_PREFIX."_settings SET value = ? WHERE setting = 'config.version';", array((int)$rev));
 		return !(empty($ret));
