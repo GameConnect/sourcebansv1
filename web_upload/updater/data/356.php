@@ -6,7 +6,7 @@
 																			`flags` varchar(30) NOT NULL,
 																			PRIMARY KEY (`id`),
 																			UNIQUE KEY `type` (`type`,`name`)
-																		) ENGINE=MyISAM DEFAULT CHARSET=utf8;");
+																		) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;");
 	if(!$create)
 		return false;
 	
@@ -18,7 +18,7 @@
 																			`access` enum('allow','deny') NOT NULL,
 																			PRIMARY KEY (`id`),
 																			UNIQUE KEY `group_id` (`group_id`,`type`,`name`)
-																		) ENGINE=MyISAM DEFAULT CHARSET=utf8;");
+																		) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;");
 	if(!$create)
 		return false;
 	return true;

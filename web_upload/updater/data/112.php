@@ -47,7 +47,7 @@
 									  `editaid` int(6) default NULL,
 									  `edittime` datetime default NULL,
 									  KEY `cid` (`cid`)
-									) ENGINE=MyISAM  DEFAULT CHARSET=utf8;");
+									) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;");
 	if(!$ret6)
 			return false;
 	
