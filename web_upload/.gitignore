@@ -3,3 +3,4 @@
 !demos/.gitkeep
 /themes_c/*
 !themes_c/.gitkeep
+/vendor/
