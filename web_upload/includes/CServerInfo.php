@@ -57,6 +57,11 @@ class CServerInfo
     $this->raw = $packet;
     $ret = array();
     $type = $this->_getraw(1);
+    if($type == self::A2S_SERVERQUERY_GETCHALLENGE_RESPONSE)
+    { // Re-send the query with the challenge we received.
+      $this->raw = $this->_request($socket, self::A2S_INFO . $this->_getraw(4));
+      $type = $this->_getraw(1);
+    }
     if($type == self::A2S_INFO_RESPONSE)
     { // New protocol for Source and Goldsrc
       $this->_getbyte();  // Version
@@ -445,4 +450,3 @@ class CServerInfo
     $this->raw = substr($this->raw, $c);
   }
 }
-
